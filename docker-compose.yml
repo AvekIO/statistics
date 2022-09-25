@@ -28,7 +28,7 @@ services:
     ports:
       - ${DOCKER_EXPOSE_PORT_DB}:3306
 
-  cache:
+  redis:
     image: redis:alpine
     ports:
       - '6379:6379'
