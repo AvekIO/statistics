@@ -26,7 +26,7 @@ return [
     ],
     'migrations' => 'migrations',
     'redis' => [
-        'client' => 'phpredis',
+        'client' => 'predis',
         'options' => [
             'cluster' => 'redis',
             'prefix' => env('APP_ENV') . '_' . '_database_',
