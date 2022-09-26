@@ -11,5 +11,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(BotStatisticsSeeder::class);
         $this->call(FlowBlockStatisticsSeeder::class);
+        $this->call(FlowCommandsStatisticsSeeder::class);
+        $this->call(FlowTelegramUsersStatisticsSeeder::class);
     }
 }
