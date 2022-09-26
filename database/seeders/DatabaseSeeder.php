@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-         $this->call(BotStatisticsSeeder::class);
+        $this->call(BotStatisticsSeeder::class);
+        $this->call(FlowBlockStatisticsSeeder::class);
     }
 }
