@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bot_statistics', function (Blueprint $table): void {
-            $table->string('bot_token', 50)->primary();
+            $table->string('bot_token', 50);
             $table->mediumInteger(column: 'sent', unsigned: true)->default(0);
             $table->mediumInteger(column: 'received', unsigned: true)->default(0);
             $table->mediumInteger(column: 'triggered', unsigned: true)->default(0);
@@ -18,7 +18,7 @@ return new class extends Migration
             $table->mediumInteger(column: 'unsubscribed', unsigned: true)->default(0);
             $table->timestamp('created_at')->useCurrent();
 
-            $table->index(['bot_token', 'created_at']);
+            $table->primary(['bot_token', 'created_at'], 'primary');
         });
     }
 
