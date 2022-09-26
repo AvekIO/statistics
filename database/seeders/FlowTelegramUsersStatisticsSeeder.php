@@ -10,7 +10,7 @@ class FlowTelegramUsersStatisticsSeeder extends Seeder
 {
     private const TABLE_SEED_COUNT = 10000;
 
-    public function run()
+    public function run(): void
     {
         FlowTelegramUsersStatistics::factory()->count(self::TABLE_SEED_COUNT)->create();
     }
