@@ -5,10 +5,11 @@ namespace App\DTO;
 
 use Illuminate\Http\Request;
 
-class BotStatisticsDto
+class FlowCommandsStatisticsDto
 {
     public function __construct(
-        public readonly string $botToken,
+        public readonly int $flowId,
+        public readonly ?int $commandId,
         public readonly ?string $createdAtFrom,
         public readonly ?string $createdAtTo
     ) {}
@@ -16,7 +17,8 @@ class BotStatisticsDto
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('bot_token'),
+            $request->integer('flow_id'),
+            $request->input('command_id') ? $request->integer('command_id') : null,
             $request->input('created_at_from'),
             $request->input('created_at_to'),
         );
