@@ -1,19 +1,17 @@
 <?php
+declare(strict_types=1);
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BotStatisticsController;
+use App\Http\Controllers\FlowBlockStatisticsController;
+use App\Http\Controllers\FlowCommandsStatisticsController;
+use App\Http\Controllers\FlowTelegramUsersStatisticsController;
+use App\Http\Responses\NotFoundResponse;
+use Illuminate\Routing\Router;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+/** @var Router $router */
+$router->get('/bots/{bot_token}', [BotStatisticsController::class, 'index']);
+$router->get('/flows/{flow_id}/commands/{command_id?}', [FlowCommandsStatisticsController::class, 'index']);
+$router->get('/flows/{flow_id}/blocks/{block_id?}', [FlowBlockStatisticsController::class, 'index']);
+$router->get('/flows/{flow_id}/telegram-users/{telegram_user_id?}', [FlowTelegramUsersStatisticsController::class, 'index']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$router->fallback(fn () => new NotFoundResponse());
