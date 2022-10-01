@@ -15,6 +15,6 @@ class FlowTelegramUsersStatisticsService
 
     public function getCollection(FlowTelegramUsersStatisticsDto $dto): Collection
     {
-        return $this->repository->getList($dto->flowId, $dto->botChatTelegramUserId);
+        return $this->repository->getList($dto->flowId, $dto->telegramUserId);
     }
 }

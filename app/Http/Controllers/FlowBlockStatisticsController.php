@@ -14,11 +14,20 @@ class FlowBlockStatisticsController
     {
     }
 
-    public function index(FlowBlockStatisticsIndexRequest $request): JsonResponse
+    public function index(FlowBlockStatisticsIndexRequest $request, int $flowId, int $blockId = null): JsonResponse
     {
-        $dto = FlowBlockStatisticsDto::fromRequest($request);
-        $collection = $this->service->getCollection($dto);
+        $collection = $this->service->getCollection($this->getDto($flowId, $blockId, $request));
 
         return new JsonResponse($collection);
+    }
+
+    private function getDto(int $flowId, ?int $blockId, FlowBlockStatisticsIndexRequest $request): FlowBlockStatisticsDto
+    {
+        return new FlowBlockStatisticsDto(
+            $flowId,
+            $blockId,
+            $request->input('created_at_from'),
+            $request->input('created_at_to')
+        );
     }
 }

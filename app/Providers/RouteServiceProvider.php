@@ -8,7 +8,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 class RouteServiceProvider extends ServiceProvider
 {
     private const ROUTES_MAP = [
-        'api' => 'routes/api.php',
+        '' => 'routes/api.php',
     ];
 
     public function map(): void
@@ -16,5 +16,15 @@ class RouteServiceProvider extends ServiceProvider
         foreach (self::ROUTES_MAP as $prefix => $filepath) {
             $this->app['router']->prefix($prefix)->group(base_path($filepath));
         }
+    }
+
+    public function boot(): void
+    {
+        $this->app['router']->patterns([
+            'flow_id' => '[0-9]+',
+            'command_id' => '[0-9]+',
+            'block_id' => '[0-9]+',
+            'telegram_user_id' => '[0-9]+',
+        ]);
     }
 }
