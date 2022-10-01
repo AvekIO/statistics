@@ -13,14 +13,4 @@ class FlowBlockStatisticsDto
         public readonly ?string $createdAtFrom,
         public readonly ?string $createdAtTo
     ) {}
-
-    public static function fromRequest(Request $request): self
-    {
-        return new self(
-            $request->integer('flow_id'),
-            $request->input('block_id') ? $request->integer('block_id') : null,
-            $request->input('created_at_from'),
-            $request->input('created_at_to'),
-        );
-    }
 }
