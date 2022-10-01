@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
             'flow_id' => '[0-9]+',
             'command_id' => '[0-9]+',
             'block_id' => '[0-9]+',
+            'telegram_user_id' => '[0-9]+',
         ]);
     }
 }

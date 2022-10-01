@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\FlowTelegramUsersStatisticsDto;
-use App\Http\Requests\FlowTelegramUsersStatisticsIndexRequest;
 use App\Services\FlowTelegramUsersStatisticsService;
 use Illuminate\Http\JsonResponse;
 
@@ -14,11 +13,18 @@ class FlowTelegramUsersStatisticsController
     {
     }
 
-    public function index(FlowTelegramUsersStatisticsIndexRequest $request): JsonResponse
+    public function index(int $flowId, int $telegramUserId = null): JsonResponse
     {
-        $dto = FlowTelegramUsersStatisticsDto::fromRequest($request);
-        $collection = $this->service->getCollection($dto);
+        $collection = $this->service->getCollection($this->getDto($flowId, $telegramUserId));
 
         return new JsonResponse($collection);
+    }
+
+    private function getDto(int $flowId, ?int $telegramUserId): FlowTelegramUsersStatisticsDto
+    {
+        return new FlowTelegramUsersStatisticsDto(
+            $flowId,
+            $telegramUserId
+        );
     }
 }
