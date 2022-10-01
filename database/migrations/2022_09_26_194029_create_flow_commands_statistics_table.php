@@ -12,10 +12,10 @@ return new class extends Migration
         Schema::create('flow_commands_statistics', function (Blueprint $table): void {
             $table->smallInteger(column: 'flow_id', unsigned: true);
             $table->mediumInteger(column: 'command_id', unsigned: true);
-            $table->bigInteger(column: 'bot_chat_telegram_user_id', unsigned: true);
+            $table->bigInteger(column: 'telegram_user_id', unsigned: true);
             $table->timestamp('created_at')->useCurrent();
 
-            $table->primary(['flow_id', 'command_id', 'created_at', 'bot_chat_telegram_user_id'], 'primary');
+            $table->primary(['flow_id', 'command_id', 'created_at', 'telegram_user_id'], 'primary');
         });
     }
 

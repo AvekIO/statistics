@@ -16,7 +16,7 @@ class FlowCommandsStatisticsFactory extends Factory
         return [
             'flow_id' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
             'command_id' => rand(0, self::MEDIUM_INT_UNSIGNED_MAX),
-            'bot_chat_telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
+            'telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
             'created_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
