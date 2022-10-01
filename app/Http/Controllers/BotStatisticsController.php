@@ -14,11 +14,19 @@ class BotStatisticsController
     {
     }
 
-    public function index(BotStatisticsIndexRequest $request): JsonResponse
+    public function index(BotStatisticsIndexRequest $request, string $botToken): JsonResponse
     {
-        $dto = BotStatisticsDto::fromRequest($request);
-        $collection = $this->service->getCollection($dto);
+        $collection = $this->service->getCollection($this->getDto($botToken, $request));
 
         return new JsonResponse($collection);
+    }
+
+    private function getDto(string $botToken, BotStatisticsIndexRequest $request): BotStatisticsDto
+    {
+        return new BotStatisticsDto(
+            $botToken,
+            $request->input('created_at_from'),
+            $request->input('created_at_to')
+        );
     }
 }
