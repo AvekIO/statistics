@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-class BotStatisticsIndexRequest extends AbstractRequest
+class BaseRequest extends AbstractRequest
 {
     public function rules(): array
     {

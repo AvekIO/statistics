@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\FlowCommandsStatisticsDto;
-use App\Http\Requests\FlowCommandsStatisticsIndexRequest;
+use App\Http\Requests\BaseRequest;
 use App\Services\FlowCommandsStatisticsService;
 use Illuminate\Http\JsonResponse;
 
@@ -14,14 +14,14 @@ class FlowCommandsStatisticsController
     {
     }
 
-    public function index(FlowCommandsStatisticsIndexRequest $request, int $flowId, int $commandId = null): JsonResponse
+    public function index(BaseRequest $request, int $flowId, int $commandId = null): JsonResponse
     {
         $collection = $this->service->getCollection($this->getDto($flowId, $commandId, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function getDto(int $flowId, ?int $commandId, FlowCommandsStatisticsIndexRequest $request): FlowCommandsStatisticsDto
+    private function getDto(int $flowId, ?int $commandId, BaseRequest $request): FlowCommandsStatisticsDto
     {
         return new FlowCommandsStatisticsDto(
             $flowId,
