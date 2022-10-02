@@ -11,13 +11,13 @@ return new class extends Migration
     {
         Schema::create('flow_telegram_users_statistics', function (Blueprint $table): void {
             $table->smallInteger(column: 'flow_id', unsigned: true);
-            $table->bigInteger(column: 'bot_chat_telegram_user_id', unsigned: true);
+            $table->bigInteger(column: 'telegram_user_id', unsigned: true);
             $table->smallInteger(column: 'sent', unsigned: true)->default(0);
             $table->smallInteger(column: 'received', unsigned: true)->default(0);
             $table->mediumInteger(column: 'space_used', unsigned: true)->default(0);
             $table->timestamp('subscribed_at');
 
-            $table->primary(['flow_id', 'bot_chat_telegram_user_id'], 'primary');
+            $table->primary(['flow_id', 'telegram_user_id'], 'primary');
             $table->index(['flow_id', 'sent'], 'flow_id_sent');
             $table->index(['flow_id', 'space_used'], 'flow_id_space_used');
             $table->index(['flow_id', 'subscribed_at'], 'flow_id_subscribed_at');

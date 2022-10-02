@@ -15,7 +15,7 @@ class FlowTelegramUsersStatisticsFactory extends Factory
     {
         return [
             'flow_id' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
-            'bot_chat_telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
+            'telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
             'sent' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
             'received' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
             'space_used' => rand(0, self::MEDIUM_INT_UNSIGNED_MAX),

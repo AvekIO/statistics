@@ -13,13 +13,11 @@ class FlowTelegramUsersStatisticsRepository
     {
     }
 
-    public function getList(int $flowId, ?int $botChatTelegramUserId): Collection
+    public function getList(int $flowId, ?int $telegramUserId): Collection
     {
         return $this->model->query()
             ->where('flow_id', $flowId)
-            ->when($botChatTelegramUserId,
-                fn (Builder $query) => $query->where('bot_chat_telegram_user_id', $botChatTelegramUserId)
-            )
+            ->when($telegramUserId, fn (Builder $query) => $query->where('telegram_user_id', $telegramUserId))
             ->orderBy('subscribed_at', 'desc')
             ->get();
     }
