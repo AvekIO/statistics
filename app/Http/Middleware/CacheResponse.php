@@ -12,6 +12,10 @@ class CacheResponse
 
     public function handle(Request $request, Closure $next)
     {
-        return cache()->remember($request->fullUrl(), self::CACHE_TTL, fn () => $next($request));
+        if (app()->isProduction()) {
+            return cache()->remember($request->fullUrl(), self::CACHE_TTL, fn () => $next($request));
+        }
+
+        return $next($request);
     }
 }
