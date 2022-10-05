@@ -32,7 +32,7 @@ class HealthCheckService
 
     private function wrapCheck(callable $func): bool|string
     {
-        try{
+        try {
             return $func();
         } catch (Exception $exception){
             $this->status = false;

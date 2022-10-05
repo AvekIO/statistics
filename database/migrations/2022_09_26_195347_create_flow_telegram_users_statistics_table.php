@@ -10,11 +10,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('flow_telegram_users_statistics', function (Blueprint $table): void {
-            $table->smallInteger(column: 'flow_id', unsigned: true);
-            $table->bigInteger(column: 'telegram_user_id', unsigned: true);
-            $table->smallInteger(column: 'sent', unsigned: true)->default(0);
-            $table->smallInteger(column: 'received', unsigned: true)->default(0);
-            $table->mediumInteger(column: 'space_used', unsigned: true)->default(0);
+            $table->unsignedSmallInteger('flow_id');
+            $table->unsignedBigInteger('telegram_user_id');
+            $table->unsignedSmallInteger('sent')->default(0);
+            $table->unsignedSmallInteger('received')->default(0);
+            $table->unsignedMediumInteger('space_used')->default(0);
             $table->timestamp('subscribed_at');
 
             $table->primary(['flow_id', 'telegram_user_id'], 'primary');
