@@ -11,11 +11,11 @@ return new class extends Migration
     {
         Schema::create('bot_statistics', function (Blueprint $table): void {
             $table->string('bot_token', 50);
-            $table->mediumInteger(column: 'sent', unsigned: true)->default(0);
-            $table->mediumInteger(column: 'received', unsigned: true)->default(0);
-            $table->mediumInteger(column: 'triggered', unsigned: true)->default(0);
-            $table->mediumInteger(column: 'subscribed', unsigned: true)->default(0);
-            $table->mediumInteger(column: 'unsubscribed', unsigned: true)->default(0);
+            $table->unsignedMediumInteger('sent')->default(0);
+            $table->unsignedMediumInteger('received')->default(0);
+            $table->unsignedMediumInteger('triggered')->default(0);
+            $table->unsignedMediumInteger('subscribed')->default(0);
+            $table->unsignedMediumInteger('unsubscribed')->default(0);
             $table->timestamp('created_at')->useCurrent();
 
             $table->primary(['bot_token', 'created_at'], 'primary');
