@@ -6,14 +6,11 @@ return [
     'env' => env('APP_ENV'),
     'debug' => (bool) env('APP_DEBUG'),
     'url' => env('APP_URL'),
-    'timezone' => 'Europe/Kyiv',
-    'locale' => 'en',
+    'timezone' => env('APP_TIMEZONE'),
+    'locale' => env('APP_LOCALE'),
     'faker_locale' => 'en_US',
     'key' => env('APP_KEY'),
     'cipher' => 'AES-256-CBC',
-    'maintenance' => [
-        'driver' => 'file',
-    ],
     'providers' => [
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
