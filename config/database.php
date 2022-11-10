@@ -15,7 +15,7 @@ return [
             'collation' => env('MYSQL_COLLATION'),
         ],
     ],
-    'migrations' => env('MIGRATIONS_TABLE_NAME'),
+    'migrations' => env('DB_MIGRATIONS_TABLE_NAME'),
     'redis' => [
         'client' => env('REDIS_CLIENT'),
         'options' => [
