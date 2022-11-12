@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->primary(['flow_id', 'telegram_user_id'], 'primary');
             $table->index(['flow_id', 'sent'], 'flow_id_sent');
+            $table->index(['flow_id', 'received'], 'flow_id_received');
             $table->index(['flow_id', 'space_used'], 'flow_id_space_used');
             $table->index(['flow_id', 'subscribed_at'], 'flow_id_subscribed_at');
         });

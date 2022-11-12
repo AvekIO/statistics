@@ -10,12 +10,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('flow_block_statistics', function (Blueprint $table): void {
+            $table->id();
             $table->unsignedSmallInteger('flow_id');
             $table->unsignedMediumInteger('block_id');
-            $table->unsignedBigInteger('telegram_user_id');
-            $table->timestamp('created_at')->useCurrent();
+            $table->unsignedBigInteger('message_id');
+            $table->timestamp('created_at');
 
-            $table->primary(['flow_id', 'block_id', 'created_at', 'telegram_user_id'], 'primary');
+            $table->index(['flow_id', 'block_id', 'created_at'], 'flow_id_block_id_created_at');
         });
     }
 

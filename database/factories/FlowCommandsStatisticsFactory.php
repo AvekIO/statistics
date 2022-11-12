@@ -5,18 +5,14 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FlowCommandsStatisticsFactory extends Factory
+class FlowCommandsStatisticsFactory extends Factory implements DatabaseFactoryInterface
 {
-    private const SMALL_INT_UNSIGNED_MAX = 65535;
-    private const MEDIUM_INT_UNSIGNED_MAX = 16777215;
-    private const BIG_INT_UNSIGNED_MAX = PHP_INT_MAX;
-
     public function definition(): array
     {
         return [
-            'flow_id' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
-            'command_id' => rand(0, self::MEDIUM_INT_UNSIGNED_MAX),
-            'telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
+            'flow_id' => $this->faker->numberBetween(0, self::INT_SMALL_UNSIGNED_MAX_VALUE),
+            'command_id' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
+            'bot_chat_telegram_user_id' => $this->faker->numberBetween(0, self::INT_BIG_UNSIGNED_MAX_VALUE),
             'created_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
