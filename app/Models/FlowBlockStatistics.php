@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class FlowBlockStatistics extends Model
+class FlowBlockStatistics extends AbstractModel
 {
-    use HasFactory;
-
     public const UPDATED_AT = null;
+
+    protected $table = 'flow_block_statistics';
 }
