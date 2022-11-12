@@ -16,12 +16,12 @@ class BotStatisticsController
 
     public function index(BaseRequest $request, string $botToken): JsonResponse
     {
-        $collection = $this->service->getCollection($this->getDto($botToken, $request));
+        $collection = $this->service->getCollection($this->convertToDto($botToken, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function getDto(string $botToken, BaseRequest $request): BotStatisticsDto
+    private function convertToDto(string $botToken, BaseRequest $request): BotStatisticsDto
     {
         return new BotStatisticsDto(
             $botToken,

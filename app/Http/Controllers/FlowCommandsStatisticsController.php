@@ -16,12 +16,12 @@ class FlowCommandsStatisticsController
 
     public function index(BaseRequest $request, int $flowId, int $commandId = null): JsonResponse
     {
-        $collection = $this->service->getCollection($this->getDto($flowId, $commandId, $request));
+        $collection = $this->service->getCollection($this->convertToDto($flowId, $commandId, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function getDto(int $flowId, ?int $commandId, BaseRequest $request): FlowCommandsStatisticsDto
+    private function convertToDto(int $flowId, ?int $commandId, BaseRequest $request): FlowCommandsStatisticsDto
     {
         return new FlowCommandsStatisticsDto(
             $flowId,

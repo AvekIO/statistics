@@ -15,16 +15,13 @@ class FlowTelegramUsersStatisticsController
 
     public function index(int $flowId, int $telegramUserId = null): JsonResponse
     {
-        $collection = $this->service->getCollection($this->getDto($flowId, $telegramUserId));
+        $collection = $this->service->getCollection($this->convertToDto($flowId, $telegramUserId));
 
         return new JsonResponse($collection);
     }
 
-    private function getDto(int $flowId, ?int $telegramUserId): FlowTelegramUsersStatisticsDto
+    private function convertToDto(int $flowId, ?int $telegramUserId): FlowTelegramUsersStatisticsDto
     {
-        return new FlowTelegramUsersStatisticsDto(
-            $flowId,
-            $telegramUserId
-        );
+        return new FlowTelegramUsersStatisticsDto($flowId, $telegramUserId);
     }
 }
