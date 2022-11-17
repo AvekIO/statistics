@@ -18,7 +18,7 @@ class BotStatisticsFactory extends Factory implements DatabaseFactoryInterface
             'triggered' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
             'subscribed' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
             'unsubscribed' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
-            'created_at' => $this->faker->dateTimeBetween('-1 year'),
+            'date_hour' => $this->faker->dateTimeBetween('-1 year')->format('Y-m-d H:00:00'),
         ];
     }
 }

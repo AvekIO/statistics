@@ -16,7 +16,7 @@ class BotStatisticsController
 
     public function index(BaseRequest $request, string $botToken): JsonResponse
     {
-        $collection = $this->service->getCollection($this->convertToDto($botToken, $request));
+        $collection = $this->service->getDistributionOverTime($this->convertToDto($botToken, $request));
 
         return new JsonResponse($collection);
     }
@@ -25,8 +25,8 @@ class BotStatisticsController
     {
         return new BotStatisticsDto(
             $botToken,
-            $request->input('created_at_from'),
-            $request->input('created_at_to')
+            $request->input('date_hour_from'),
+            $request->input('date_hour_to')
         );
     }
 }

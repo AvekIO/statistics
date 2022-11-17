@@ -13,13 +13,13 @@ class BotStatisticsRepository
     {
     }
 
-    public function getList(string $botToken, ?string $createdAtFrom, ?string $createdAtTo): Collection
+    public function getByBotTokenAndDateHourInterval(string $botToken, ?string $dateHourFrom, ?string $dateHourTo): Collection
     {
         return $this->model->query()
             ->where('bot_token', $botToken)
-            ->when($createdAtFrom, fn (Builder $query) => $query->where('created_at', '>=', $createdAtFrom))
-            ->when($createdAtTo, fn (Builder $query) => $query->where('created_at', '<=', $createdAtTo))
-            ->orderBy('created_at')
+            ->when($dateHourFrom, fn (Builder $query) => $query->where('date_hour', '>=', $dateHourFrom))
+            ->when($dateHourTo, fn (Builder $query) => $query->where('date_hour', '<=', $dateHourTo))
+            ->orderBy('date_hour')
             ->get();
     }
 }
