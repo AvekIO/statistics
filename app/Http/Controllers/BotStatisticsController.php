@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\BotStatisticsDto;
-use App\Http\Requests\BaseRequest;
+use App\Http\Requests\BotStatisticsIndexRequest;
 use App\Services\BotStatisticsService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class BotStatisticsController
 {
@@ -14,14 +15,14 @@ class BotStatisticsController
     {
     }
 
-    public function index(BaseRequest $request, string $botToken): JsonResponse
+    public function index(BotStatisticsIndexRequest $request, string $botToken): JsonResponse
     {
-        $collection = $this->service->getDistributionOverTime($this->convertToDto($botToken, $request));
+        $collection = $this->service->getDistributionOverTime($this->wrapIntoDto($botToken, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function convertToDto(string $botToken, BaseRequest $request): BotStatisticsDto
+    private function wrapIntoDto(string $botToken, Request $request): BotStatisticsDto
     {
         return new BotStatisticsDto(
             $botToken,
