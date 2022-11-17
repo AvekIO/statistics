@@ -14,6 +14,11 @@ return [
             'charset' => env('MYSQL_CHARSET'),
             'collation' => env('MYSQL_COLLATION'),
         ],
+        'sqlite' => [
+            'driver' => env('SQLITE_DRIVER'),
+            'database' => env('SQLITE_DATABASE'),
+            'foreign_key_constraints' => (bool) env('SQLITE_FOREIGN_KEYS'),
+        ],
     ],
     'migrations' => env('DB_MIGRATIONS_TABLE_NAME'),
     'redis' => [
