@@ -46,6 +46,26 @@ class BotStatisticsTest extends TestCase
         $response->assertExactJson($sortedBotStatistics);
     }
 
+    public function test_endpoint_returns_error_when_date_hour_query_param_is_invalid()
+    {
+        $url = $this->getUrlWithBotToken($this->generateBotToken()) . "?date_hour_from=123&date_hour_to=asd";
+
+        $response = $this->get($url);
+
+        $response->assertStatus(422);
+        $response->assertExactJson([
+            'errors' => [
+                'date_hour_from' => [
+                    'validation.date_format',
+                ],
+                'date_hour_to' => [
+                    'validation.date_format',
+                ],
+            ],
+            'status' => true,
+        ]);
+    }
+
     public function test_endpoint_returns_json_with_data_that_filtered_by_date_hour_query_param()
     {
         $botToken = $this->generateBotToken();
@@ -56,6 +76,7 @@ class BotStatisticsTest extends TestCase
             'between_from_and_to' => '2021-06-01 00:00:00',
             'after_to' => '2022-06-01 00:00:00',
         ];
+        $url = $this->getUrlWithBotToken($botToken) . "?date_hour_from=$dateHourFromQueryParam&date_hour_to=$dateHourToQueryParam";
 
         foreach ($dateHoursValues as $dateHour) {
             BotStatistics::factory()->create([
@@ -64,7 +85,7 @@ class BotStatisticsTest extends TestCase
             ]);
         }
 
-        $response = $this->get($this->getUrlWithBotToken($botToken) . "?date_hour_from=$dateHourFromQueryParam&date_hour_to=$dateHourToQueryParam");
+        $response = $this->get($url);
 
         $response->assertStatus(200);
         $response->assertJsonCount(1);
