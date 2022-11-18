@@ -3,9 +3,18 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-class FlowBlockStatistics extends AbstractModel
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class FlowBlockStatistics extends Model
 {
-    public const UPDATED_AT = null;
+    use HasFactory;
+
+    public $timestamps = false;
 
     protected $table = 'flow_block_statistics';
+
+    protected $casts = [
+        'triggered_at'  => 'datetime:Y-m-d H:i:s',
+    ];
 }

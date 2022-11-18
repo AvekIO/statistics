@@ -14,9 +14,9 @@ return new class extends Migration
             $table->unsignedSmallInteger('flow_id');
             $table->unsignedMediumInteger('block_id');
             $table->unsignedBigInteger('message_id');
-            $table->timestamp('created_at');
+            $table->timestamp('triggered_at');
 
-            $table->index(['flow_id', 'block_id', 'created_at'], 'flow_id_block_id_created_at');
+            $table->index(['flow_id', 'block_id', 'triggered_at'], 'flow_id_block_id_triggered_at');
         });
     }
 

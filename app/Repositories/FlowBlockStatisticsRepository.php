@@ -13,14 +13,18 @@ class FlowBlockStatisticsRepository
     {
     }
 
-    public function getList(int $flowId, ?int $blockId, ?string $createdAtFrom, ?string $createdAtTo): Collection
-    {
+    public function getByFlowIdAndBlockIdAndTriggeredAtInterval(
+        int $flowId,
+        ?int $blockId,
+        ?string $triggeredAtFrom,
+        ?string $triggeredAtTo
+    ): Collection {
         return $this->model->query()
             ->where('flow_id', $flowId)
             ->when($blockId, fn (Builder $query) => $query->where('block_id', $blockId))
-            ->when($createdAtFrom, fn (Builder $query) => $query->where('created_at', '>=', $createdAtFrom))
-            ->when($createdAtTo, fn (Builder $query) => $query->where('created_at', '<=', $createdAtTo))
-            ->orderBy('created_at')
+            ->when($triggeredAtFrom, fn (Builder $query) => $query->where('triggered_at', '>=', $triggeredAtFrom))
+            ->when($triggeredAtTo, fn (Builder $query) => $query->where('triggered_at', '<=', $triggeredAtTo))
+            ->orderBy('triggered_at')
             ->get();
     }
 }

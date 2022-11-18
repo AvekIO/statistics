@@ -13,7 +13,7 @@ class FlowBlockStatisticsFactory extends Factory implements DatabaseFactoryInter
             'flow_id' => $this->faker->numberBetween(0, self::INT_SMALL_UNSIGNED_MAX_VALUE),
             'block_id' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
             'message_id' => $this->faker->numberBetween(0, self::INT_BIG_UNSIGNED_MAX_VALUE),
-            'created_at' => $this->faker->dateTimeBetween('-1 year'),
+            'triggered_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
 }

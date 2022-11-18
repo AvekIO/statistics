@@ -3,8 +3,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-class BotStatistics extends AbstractModel
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BotStatistics extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     public $incrementing = false;

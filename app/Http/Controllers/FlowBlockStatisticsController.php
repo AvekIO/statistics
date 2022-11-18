@@ -4,9 +4,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\FlowBlockStatisticsDto;
-use App\Http\Requests\BaseRequest;
+use App\Http\Requests\FlowBlockStatisticsIndexRequest;
 use App\Services\FlowBlockStatisticsService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class FlowBlockStatisticsController
 {
@@ -14,20 +15,20 @@ class FlowBlockStatisticsController
     {
     }
 
-    public function index(BaseRequest $request, int $flowId, int $blockId = null): JsonResponse
+    public function index(FlowBlockStatisticsIndexRequest $request, int $flowId, int $blockId = null): JsonResponse
     {
-        $collection = $this->service->getCollection($this->convertToDto($flowId, $blockId, $request));
+        $collection = $this->service->getSummary($this->wrapIntoDto($flowId, $blockId, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function convertToDto(int $flowId, ?int $blockId, BaseRequest $request): FlowBlockStatisticsDto
+    private function wrapIntoDto(int $flowId, ?int $blockId, Request $request): FlowBlockStatisticsDto
     {
         return new FlowBlockStatisticsDto(
             $flowId,
             $blockId,
-            $request->input('created_at_from'),
-            $request->input('created_at_to')
+            $request->input('triggered_at_from'),
+            $request->input('triggered_at_to')
         );
     }
 }
