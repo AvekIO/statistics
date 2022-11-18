@@ -16,7 +16,7 @@ class BotStatisticsTest extends TestCase
 
     public function test_endpoint_returns_empty_json_when_bot_token_is_not_exists_in_database()
     {
-        $response = $this->get($this->getUrlWithBotToken());
+        $response = $this->get($this->buildUrl());
 
         $response->assertStatus(200);
         $response->assertExactJson([]);
@@ -26,7 +26,7 @@ class BotStatisticsTest extends TestCase
     {
         $botStatistics = BotStatistics::factory()->create();
 
-        $response = $this->get($this->getUrlWithBotToken($botStatistics->bot_token));
+        $response = $this->get($this->buildUrl($botStatistics->bot_token));
 
         $response->assertStatus(200);
         $response->assertExactJson([$botStatistics->toArray()]);
@@ -40,7 +40,7 @@ class BotStatisticsTest extends TestCase
         ]);
         $sortedBotStatistics = $createdBotStatistics->sortBy('date_hour')->values()->toArray();
 
-        $response = $this->get($this->getUrlWithBotToken($botToken));
+        $response = $this->get($this->buildUrl($botToken));
 
         $response->assertStatus(200);
         $response->assertExactJson($sortedBotStatistics);
@@ -48,7 +48,7 @@ class BotStatisticsTest extends TestCase
 
     public function test_endpoint_returns_error_when_date_hour_query_param_is_invalid()
     {
-        $url = $this->getUrlWithBotToken($this->generateBotToken()) . "?date_hour_from=123&date_hour_to=asd";
+        $url = $this->buildUrl() . "?date_hour_from=123&date_hour_to=asd";
 
         $response = $this->get($url);
 
@@ -76,7 +76,7 @@ class BotStatisticsTest extends TestCase
             'between_from_and_to' => '2021-06-01 00:00:00',
             'after_to' => '2022-06-01 00:00:00',
         ];
-        $url = $this->getUrlWithBotToken($botToken) . "?date_hour_from=$dateHourFromQueryParam&date_hour_to=$dateHourToQueryParam";
+        $url = $this->buildUrl($botToken) . "?date_hour_from=$dateHourFromQueryParam&date_hour_to=$dateHourToQueryParam";
 
         foreach ($dateHoursValues as $dateHour) {
             BotStatistics::factory()->create([
@@ -92,7 +92,7 @@ class BotStatisticsTest extends TestCase
         $this->assertTrue($response->json('0.date_hour') === $dateHoursValues['between_from_and_to']);
     }
 
-    private function getUrlWithBotToken(string $botToken = null): string
+    private function buildUrl(string $botToken = null): string
     {
         return str_replace('{bot_token}', $botToken ?? $this->generateBotToken(), self::API_ENDPOINT);
     }
