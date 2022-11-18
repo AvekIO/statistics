@@ -13,8 +13,13 @@ class FlowTelegramUsersStatisticsService
     {
     }
 
-    public function getCollection(FlowTelegramUsersStatisticsDto $dto): Collection
+    public function getSummary(FlowTelegramUsersStatisticsDto $dto): Collection
     {
-        return $this->repository->getList($dto->flowId, $dto->telegramUserId);
+        return $this->repository->getByFlowIdAndTelegramUserIdAndSubscribedAtInterval(
+            $dto->flowId,
+            $dto->telegramUserId,
+            $dto->subscribedAtFrom,
+            $dto->subscribedAtTo
+        );
     }
 }

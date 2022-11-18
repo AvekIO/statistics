@@ -14,9 +14,9 @@ return new class extends Migration
             $table->unsignedSmallInteger('flow_id');
             $table->unsignedMediumInteger('command_id');
             $table->unsignedBigInteger('bot_chat_telegram_user_id');
-            $table->timestamp('created_at');
+            $table->timestamp('triggered_at');
 
-            $table->index(['flow_id', 'command_id', 'created_at'], 'flow_id_command_id_created_at');
+            $table->index(['flow_id', 'command_id', 'triggered_at'], 'flow_id_command_id_triggered_at');
         });
     }
 

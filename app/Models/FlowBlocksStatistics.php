@@ -6,11 +6,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class AbstractModel extends Model
+class FlowBlocksStatistics extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $table = 'flow_block_statistics';
+
     protected $casts = [
-        'created_at'  => 'datetime:Y-m-d H:i:s',
+        'triggered_at'  => 'datetime:Y-m-d H:i:s',
     ];
 }

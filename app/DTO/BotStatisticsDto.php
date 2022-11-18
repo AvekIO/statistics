@@ -7,7 +7,7 @@ class BotStatisticsDto
 {
     public function __construct(
         public readonly string $botToken,
-        public readonly ?string $createdAtFrom,
-        public readonly ?string $createdAtTo
+        public readonly ?string $dateHourFrom,
+        public readonly ?string $dateHourTo
     ) {}
 }

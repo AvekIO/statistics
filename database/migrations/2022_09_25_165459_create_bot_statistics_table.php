@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedMediumInteger('triggered')->default(0);
             $table->unsignedMediumInteger('subscribed')->default(0);
             $table->unsignedMediumInteger('unsubscribed')->default(0);
-            $table->timestamp('created_at');
+            $table->timestamp('date_hour');
 
-            $table->primary(['bot_token', 'created_at'], 'primary');
+            $table->primary(['bot_token', 'date_hour'], 'primary');
         });
     }
 

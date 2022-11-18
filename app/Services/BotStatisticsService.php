@@ -13,8 +13,8 @@ class BotStatisticsService
     {
     }
 
-    public function getCollection(BotStatisticsDto $dto): Collection
+    public function getDistributionOverTime(BotStatisticsDto $dto): Collection
     {
-        return $this->repository->getList($dto->botToken, $dto->createdAtFrom, $dto->createdAtTo);
+        return $this->repository->getByBotTokenAndDateHourInterval($dto->botToken, $dto->dateHourFrom, $dto->dateHourTo);
     }
 }

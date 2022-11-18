@@ -13,8 +13,13 @@ class FlowCommandsStatisticsService
     {
     }
 
-    public function getCollection(FlowCommandsStatisticsDto $dto): Collection
+    public function getSummary(FlowCommandsStatisticsDto $dto): Collection
     {
-        return $this->repository->getList($dto->flowId, $dto->commandId, $dto->createdAtFrom, $dto->createdAtTo);
+        return $this->repository->getByFlowIdAndCommandIdAndTriggeredAtInterval(
+            $dto->flowId,
+            $dto->commandId,
+            $dto->triggeredAtFrom,
+            $dto->triggeredAtTo
+        );
     }
 }

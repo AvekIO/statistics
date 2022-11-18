@@ -13,14 +13,18 @@ class FlowCommandsStatisticsRepository
     {
     }
 
-    public function getList(int $flowId, ?int $commandId, ?string $createdAtFrom, ?string $createdAtTo): Collection
-    {
+    public function getByFlowIdAndCommandIdAndTriggeredAtInterval(
+        int $flowId,
+        ?int $commandId,
+        ?string $triggeredAtFrom,
+        ?string $triggeredAtTo
+    ): Collection {
         return $this->model->query()
             ->where('flow_id', $flowId)
             ->when($commandId, fn (Builder $query) => $query->where('command_id', $commandId))
-            ->when($createdAtFrom, fn (Builder $query) => $query->where('created_at', '>=', $createdAtFrom))
-            ->when($createdAtTo, fn (Builder $query) => $query->where('created_at', '<=', $createdAtTo))
-            ->orderBy('created_at')
+            ->when($triggeredAtFrom, fn (Builder $query) => $query->where('triggered_at', '>=', $triggeredAtFrom))
+            ->when($triggeredAtTo, fn (Builder $query) => $query->where('triggered_at', '<=', $triggeredAtTo))
+            ->orderBy('triggered_at')
             ->get();
     }
 }

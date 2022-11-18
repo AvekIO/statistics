@@ -8,5 +8,7 @@ class FlowTelegramUsersStatisticsDto
     public function __construct(
         public readonly int $flowId,
         public readonly ?int $telegramUserId,
+        public readonly ?string $subscribedAtFrom,
+        public readonly ?string $subscribedAtTo
     ) {}
 }
