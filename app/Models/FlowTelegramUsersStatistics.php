@@ -12,5 +12,11 @@ class FlowTelegramUsersStatistics extends Model
 
     public $timestamps = false;
 
+    public $incrementing = false;
+
     protected $table = 'flow_telegram_users_statistics';
+
+    protected $casts = [
+        'subscribed_at'  => 'datetime:Y-m-d H:i:s',
+    ];
 }
