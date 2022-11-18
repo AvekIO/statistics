@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\FlowBlockStatistics;
+use App\Models\FlowBlocksStatistics;
 use Illuminate\Database\Seeder;
 
 class FlowBlockStatisticsSeeder extends Seeder
@@ -12,6 +12,6 @@ class FlowBlockStatisticsSeeder extends Seeder
 
     public function run(): void
     {
-        FlowBlockStatistics::factory()->count(self::TABLE_SEED_COUNT)->create();
+        FlowBlocksStatistics::factory()->count(self::TABLE_SEED_COUNT)->create();
     }
 }

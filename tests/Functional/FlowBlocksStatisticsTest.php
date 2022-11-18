@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Tests\Functional;
 
-use App\Models\FlowBlockStatistics;
+use App\Models\FlowBlocksStatistics;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class FlowBlockStatisticsTest extends TestCase
+class FlowBlocksStatisticsTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -23,33 +23,33 @@ class FlowBlockStatisticsTest extends TestCase
 
     public function test_endpoint_returns_json_with_data_when_flow_id_is_exists_in_database()
     {
-        $flowBlockStatistics = FlowBlockStatistics::factory()->create();
+        $flowBlocksStatistics = FlowBlocksStatistics::factory()->create();
 
-        $response = $this->get($this->buildUrl($flowBlockStatistics->flow_id));
+        $response = $this->get($this->buildUrl($flowBlocksStatistics->flow_id));
 
         $response->assertStatus(200);
-        $response->assertExactJson([$flowBlockStatistics->toArray()]);
+        $response->assertExactJson([$flowBlocksStatistics->toArray()]);
     }
 
     public function test_endpoint_returns_json_with_sorted_data_when_many_flow_id_is_exists_in_database()
     {
         $flowId = rand();
-        $flowBlockStatistics = FlowBlockStatistics::factory()->count(5)->create([
+        $createdFlowBlocksStatistics = FlowBlocksStatistics::factory()->count(5)->create([
             'flow_id' => $flowId,
         ]);
-        $sortedBotStatistics = $flowBlockStatistics->sortBy('triggered_at')->values()->toArray();
+        $sortedFlowBlocksStatistics = $createdFlowBlocksStatistics->sortBy('triggered_at')->values()->toArray();
 
         $response = $this->get($this->buildUrl($flowId));
 
         $response->assertStatus(200);
-        $response->assertExactJson($sortedBotStatistics);
+        $response->assertExactJson($sortedFlowBlocksStatistics);
     }
 
     public function test_endpoint_returns_empty_json_when_flow_id_with_this_block_id_is_not_exists_in_database()
     {
-        $flowBlockStatistics = FlowBlockStatistics::factory()->create();
+        $flowBlocksStatistics = FlowBlocksStatistics::factory()->create();
 
-        $response = $this->get($this->buildUrl($flowBlockStatistics->flow_id, rand()));
+        $response = $this->get($this->buildUrl($flowBlocksStatistics->flow_id, rand()));
 
         $response->assertStatus(200);
         $response->assertExactJson([]);
@@ -57,28 +57,28 @@ class FlowBlockStatisticsTest extends TestCase
 
     public function test_endpoint_returns_json_with_data_when_flow_id_with_this_block_id_is_exists_in_database()
     {
-        $flowBlockStatistics = FlowBlockStatistics::factory()->create();
+        $flowBlocksStatistics = FlowBlocksStatistics::factory()->create();
 
-        $response = $this->get($this->buildUrl($flowBlockStatistics->flow_id, $flowBlockStatistics->block_id));
+        $response = $this->get($this->buildUrl($flowBlocksStatistics->flow_id, $flowBlocksStatistics->block_id));
 
         $response->assertStatus(200);
-        $response->assertExactJson([$flowBlockStatistics->toArray()]);
+        $response->assertExactJson([$flowBlocksStatistics->toArray()]);
     }
 
     public function test_endpoint_returns_json_with_sorted_data_when_many_flow_id_with_this_block_id_is_exists_in_database()
     {
         $flowId = rand();
         $blockId = rand();
-        $flowBlockStatistics = FlowBlockStatistics::factory()->count(5)->create([
+        $flowBlocksStatistics = FlowBlocksStatistics::factory()->count(5)->create([
             'flow_id' => $flowId,
             'block_id' => $blockId,
         ]);
-        $sortedBotStatistics = $flowBlockStatistics->sortBy('triggered_at')->values()->toArray();
+        $flowBlocksStatistics = $flowBlocksStatistics->sortBy('triggered_at')->values()->toArray();
 
         $response = $this->get($this->buildUrl($flowId, $blockId));
 
         $response->assertStatus(200);
-        $response->assertExactJson($sortedBotStatistics);
+        $response->assertExactJson($flowBlocksStatistics);
     }
 
     public function test_endpoint_returns_error_when_triggered_at_query_param_is_invalid()
@@ -114,7 +114,7 @@ class FlowBlockStatisticsTest extends TestCase
         $url = $this->buildUrl($flowId) . "?triggered_at_from=$triggeredAtFromQueryParam&triggered_at_to=$triggeredAtToQueryParam";
 
         foreach ($triggeredAtValues as $triggeredAt) {
-            FlowBlockStatistics::factory()->create([
+            FlowBlocksStatistics::factory()->create([
                 'flow_id' => $flowId,
                 'triggered_at' => $triggeredAt,
             ]);

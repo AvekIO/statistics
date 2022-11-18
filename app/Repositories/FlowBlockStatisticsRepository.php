@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Models\FlowBlockStatistics;
+use App\Models\FlowBlocksStatistics;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class FlowBlockStatisticsRepository
 {
-    public function __construct(private readonly FlowBlockStatistics $model)
+    public function __construct(private readonly FlowBlocksStatistics $model)
     {
     }
 

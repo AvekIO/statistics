@@ -34,15 +34,15 @@ class FlowCommandsStatisticsTest extends TestCase
     public function test_endpoint_returns_json_with_sorted_data_when_many_flow_id_is_exists_in_database()
     {
         $flowId = rand();
-        $flowCommandStatistics = FlowCommandsStatistics::factory()->count(5)->create([
+        $createdFlowCommandStatistics = FlowCommandsStatistics::factory()->count(5)->create([
             'flow_id' => $flowId,
         ]);
-        $sortedBotStatistics = $flowCommandStatistics->sortBy('triggered_at')->values()->toArray();
+        $sortedFlowCommandStatistics = $createdFlowCommandStatistics->sortBy('triggered_at')->values()->toArray();
 
         $response = $this->get($this->buildUrl($flowId));
 
         $response->assertStatus(200);
-        $response->assertExactJson($sortedBotStatistics);
+        $response->assertExactJson($sortedFlowCommandStatistics);
     }
 
     public function test_endpoint_returns_empty_json_when_flow_id_with_this_command_id_is_not_exists_in_database()
@@ -69,16 +69,16 @@ class FlowCommandsStatisticsTest extends TestCase
     {
         $flowId = rand();
         $commandId = rand();
-        $flowCommandStatistics = FlowCommandsStatistics::factory()->count(5)->create([
+        $createdFlowCommandStatistics = FlowCommandsStatistics::factory()->count(5)->create([
             'flow_id' => $flowId,
             'command_id' => $commandId,
         ]);
-        $sortedBotStatistics = $flowCommandStatistics->sortBy('triggered_at')->values()->toArray();
+        $sortedFlowCommandStatistics = $createdFlowCommandStatistics->sortBy('triggered_at')->values()->toArray();
 
         $response = $this->get($this->buildUrl($flowId, $commandId));
 
         $response->assertStatus(200);
-        $response->assertExactJson($sortedBotStatistics);
+        $response->assertExactJson($sortedFlowCommandStatistics);
     }
 
     public function test_endpoint_returns_error_when_triggered_at_query_param_is_invalid()

@@ -5,7 +5,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FlowBlockStatisticsFactory extends Factory implements DatabaseFactoryInterface
+class FlowBlocksStatisticsFactory extends Factory implements DatabaseFactoryInterface
 {
     public function definition(): array
     {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-class FlowBlockStatisticsIndexRequest extends AbstractRequest
+class FlowBlocksStatisticsIndexRequest extends AbstractRequest
 {
     public function rules(): array
     {
