@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'default' => 'redis',
+    'default' => env('CACHE_STORE'),
     'stores' => [
         'redis' => [
             'driver' => 'redis',
@@ -10,5 +10,5 @@ return [
             'lock_connection' => 'default',
         ],
     ],
-    'prefix' => env('APP_ENV') . '_cache_',
+    'prefix' => env('CACHE_PREFIX'),
 ];

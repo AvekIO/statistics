@@ -5,20 +5,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FlowTelegramUsersStatisticsFactory extends Factory
+class FlowTelegramUsersStatisticsFactory extends Factory implements DatabaseFactoryInterface
 {
-    private const SMALL_INT_UNSIGNED_MAX = 65535;
-    private const MEDIUM_INT_UNSIGNED_MAX = 16777215;
-    private const BIG_INT_UNSIGNED_MAX = PHP_INT_MAX;
-
     public function definition(): array
     {
         return [
-            'flow_id' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
-            'telegram_user_id' => rand(0, self::BIG_INT_UNSIGNED_MAX),
-            'sent' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
-            'received' => rand(0, self::SMALL_INT_UNSIGNED_MAX),
-            'space_used' => rand(0, self::MEDIUM_INT_UNSIGNED_MAX),
+            'flow_id' => $this->faker->numberBetween(0, self::INT_SMALL_UNSIGNED_MAX_VALUE),
+            'telegram_user_id' => $this->faker->numberBetween(0, self::INT_BIG_UNSIGNED_MAX_VALUE),
+            'sent' => $this->faker->numberBetween(0, self::INT_SMALL_UNSIGNED_MAX_VALUE),
+            'received' => $this->faker->numberBetween(0, self::INT_SMALL_UNSIGNED_MAX_VALUE),
+            'space_used' => $this->faker->numberBetween(0, self::INT_MEDIUM_UNSIGNED_MAX_VALUE),
             'subscribed_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
