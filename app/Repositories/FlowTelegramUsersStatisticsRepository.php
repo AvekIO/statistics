@@ -13,11 +13,17 @@ class FlowTelegramUsersStatisticsRepository
     {
     }
 
-    public function getList(int $flowId, ?int $telegramUserId): Collection
-    {
+    public function getByFlowIdAndTelegramUserIdAndSubscribedAtInterval(
+        int $flowId,
+        ?int $telegramUserId,
+        ?string $subscribedAtFrom,
+        ?string $subscribedAtTo
+    ): Collection {
         return $this->model->query()
             ->where('flow_id', $flowId)
             ->when($telegramUserId, fn (Builder $query) => $query->where('telegram_user_id', $telegramUserId))
+            ->when($subscribedAtFrom, fn (Builder $query) => $query->where('subscribed_at', '>=', $subscribedAtFrom))
+            ->when($subscribedAtTo, fn (Builder $query) => $query->where('subscribed_at', '<=', $subscribedAtTo))
             ->orderBy('subscribed_at', 'desc')
             ->get();
     }

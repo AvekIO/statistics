@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\FlowTelegramUsersStatisticsDto;
+use App\Http\Requests\FlowTelegramUsersStatisticsIndexRequest;
 use App\Services\FlowTelegramUsersStatisticsService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class FlowTelegramUsersStatisticsController
 {
@@ -13,15 +15,20 @@ class FlowTelegramUsersStatisticsController
     {
     }
 
-    public function index(int $flowId, int $telegramUserId = null): JsonResponse
+    public function index(FlowTelegramUsersStatisticsIndexRequest $request, int $flowId, int $telegramUserId = null): JsonResponse
     {
-        $collection = $this->service->getCollection($this->convertToDto($flowId, $telegramUserId));
+        $collection = $this->service->getSummary($this->wrapIntoDto($flowId, $telegramUserId, $request));
 
         return new JsonResponse($collection);
     }
 
-    private function convertToDto(int $flowId, ?int $telegramUserId): FlowTelegramUsersStatisticsDto
+    private function wrapIntoDto(int $flowId, ?int $telegramUserId, Request $request): FlowTelegramUsersStatisticsDto
     {
-        return new FlowTelegramUsersStatisticsDto($flowId, $telegramUserId);
+        return new FlowTelegramUsersStatisticsDto(
+            $flowId,
+            $telegramUserId,
+            $request->input('subscribed_at_from'),
+            $request->input('subscribed_at_to')
+        );
     }
 }
