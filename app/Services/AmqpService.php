@@ -13,6 +13,9 @@ use AMQPQueueException;
 
 class AmqpService
 {
+    private const QUEUE_CONFIG_DEFAULT_CONNECTION = 'queue.default';
+    private const QUEUE_CONFIG_LIST_OF_CONNECTIONS = 'queue.connections';
+
     private AMQPConnection $connection;
     private AMQPChannel $channel;
     private AMQPQueue $queue;
@@ -70,8 +73,6 @@ class AmqpService
 
     private function getQueueConfig(): array
     {
-        $connectionName = config('queue.default');
-
-        return config("queue.connections.$connectionName");
+        return config(self::QUEUE_CONFIG_LIST_OF_CONNECTIONS . '.' . config(self::QUEUE_CONFIG_DEFAULT_CONNECTION));
     }
 }
