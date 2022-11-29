@@ -6,7 +6,7 @@ namespace App\Jobs;
 use App\DTO\FlowTelegramUsersStatisticsFieldsDto;
 use App\Services\FlowTelegramUsersStatisticsService;
 
-class SaveFlowTelegramUsersStatisticsJob
+class SaveFlowTelegramUsersStatisticsJob implements ConsumeJobInterface
 {
     public function __construct(
         private readonly FlowTelegramUsersStatisticsFieldsDto $dto,

@@ -6,7 +6,7 @@ namespace App\Jobs;
 use App\DTO\FlowCommandsStatisticsFieldsDto;
 use App\Services\FlowCommandsStatisticsService;
 
-class SaveFlowCommandsStatisticsJob
+class SaveFlowCommandsStatisticsJob implements ConsumeJobInterface
 {
     public function __construct(
         private readonly FlowCommandsStatisticsFieldsDto $dto,
