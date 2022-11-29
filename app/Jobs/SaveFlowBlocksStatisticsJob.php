@@ -6,7 +6,7 @@ namespace App\Jobs;
 use App\DTO\FlowBlocksStatisticsFieldsDto;
 use App\Services\FlowBlocksStatisticsService;
 
-class SaveFlowBlockStatisticsJob implements ConsumableJobInterface
+class SaveFlowBlocksStatisticsJob implements ConsumableJobInterface
 {
     public function __construct(
         private readonly FlowBlocksStatisticsFieldsDto $dto,

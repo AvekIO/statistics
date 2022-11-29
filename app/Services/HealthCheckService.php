@@ -43,7 +43,7 @@ class HealthCheckService
     {
         try {
             return $func();
-        } catch (Exception $exception){
+        } catch (Exception $exception) {
             $this->status = false;
 
             return $exception->getMessage();
