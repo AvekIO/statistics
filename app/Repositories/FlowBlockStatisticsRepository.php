@@ -13,6 +13,16 @@ class FlowBlockStatisticsRepository
     {
     }
 
+    public function insert(int $flowId, int $blockId, int $messageId, string $triggeredAt): bool
+    {
+        return $this->model->query()->insert([
+            'flow_id' => $flowId,
+            'block_id' => $blockId,
+            'message_id' => $messageId,
+            'triggered_at' => $triggeredAt,
+        ]);
+    }
+
     public function getByFlowIdAndBlockIdAndTriggeredAtInterval(
         int $flowId,
         ?int $blockId,

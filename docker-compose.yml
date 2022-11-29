@@ -23,8 +23,8 @@ services:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - ${DOCKER_EXPOSE_PORT_MYSQL}:3306
 
@@ -33,3 +33,10 @@ services:
     image: redis:alpine
     ports:
       - ${DOCKER_EXPOSE_PORT_REDIS}:6379
+
+  rabbitmq:
+    container_name: ${APP_ENV}.${DOCKER_APP_NAME}.rabbitmq
+    image: rabbitmq:management
+    ports:
+      - ${DOCKER_EXPOSE_PORT_RABBITMQ}:5672
+      - ${DOCKER_EXPOSE_PORT_RABBITMQ_ADMIN}:15672
