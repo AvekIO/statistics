@@ -13,6 +13,24 @@ class FlowTelegramUsersStatisticsRepository
     {
     }
 
+    public function insert(
+        int $flowId,
+        int $telegramUserId,
+        int $sent,
+        int $received,
+        int $spaceUsed,
+        string $subscribedAt
+    ): bool {
+        return $this->model->query()->insert([
+            'flow_id' => $flowId,
+            'telegram_user_id' => $telegramUserId,
+            'sent' => $sent,
+            'received' => $received,
+            'space_used' => $spaceUsed,
+            'subscribed_at' => $subscribedAt,
+        ]);
+    }
+
     public function getByFlowIdAndTelegramUserIdAndSubscribedAtInterval(
         int $flowId,
         ?int $telegramUserId,

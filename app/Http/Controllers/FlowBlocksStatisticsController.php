@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\DTO\FlowBlocksStatisticsDto;
+use App\DTO\FlowBlocksStatisticsFiltersDto;
 use App\Http\Requests\FlowBlocksStatisticsIndexRequest;
-use App\Services\FlowBlockStatisticsService;
+use App\Services\FlowBlocksStatisticsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FlowBlocksStatisticsController
 {
-    public function __construct(private readonly FlowBlockStatisticsService $service)
+    public function __construct(private readonly FlowBlocksStatisticsService $service)
     {
     }
 
@@ -22,9 +22,9 @@ class FlowBlocksStatisticsController
         return new JsonResponse($collection);
     }
 
-    private function wrapIntoDto(int $flowId, ?int $blockId, Request $request): FlowBlocksStatisticsDto
+    private function wrapIntoDto(int $flowId, ?int $blockId, Request $request): FlowBlocksStatisticsFiltersDto
     {
-        return new FlowBlocksStatisticsDto(
+        return new FlowBlocksStatisticsFiltersDto(
             $flowId,
             $blockId,
             $request->input('triggered_at_from'),

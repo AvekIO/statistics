@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\DTO\BotStatisticsDto;
+use App\DTO\BotStatisticsFiltersDto;
 use App\Http\Requests\BotStatisticsIndexRequest;
 use App\Services\BotStatisticsService;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +22,9 @@ class BotStatisticsController
         return new JsonResponse($collection);
     }
 
-    private function wrapIntoDto(string $botToken, Request $request): BotStatisticsDto
+    private function wrapIntoDto(string $botToken, Request $request): BotStatisticsFiltersDto
     {
-        return new BotStatisticsDto(
+        return new BotStatisticsFiltersDto(
             $botToken,
             $request->input('date_hour_from'),
             $request->input('date_hour_to')

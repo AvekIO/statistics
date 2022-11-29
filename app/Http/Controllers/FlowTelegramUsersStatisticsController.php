@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\DTO\FlowTelegramUsersStatisticsDto;
+use App\DTO\FlowTelegramUsersStatisticsFiltersDto;
 use App\Http\Requests\FlowTelegramUsersStatisticsIndexRequest;
 use App\Services\FlowTelegramUsersStatisticsService;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +22,9 @@ class FlowTelegramUsersStatisticsController
         return new JsonResponse($collection);
     }
 
-    private function wrapIntoDto(int $flowId, ?int $telegramUserId, Request $request): FlowTelegramUsersStatisticsDto
+    private function wrapIntoDto(int $flowId, ?int $telegramUserId, Request $request): FlowTelegramUsersStatisticsFiltersDto
     {
-        return new FlowTelegramUsersStatisticsDto(
+        return new FlowTelegramUsersStatisticsFiltersDto(
             $flowId,
             $telegramUserId,
             $request->input('subscribed_at_from'),
