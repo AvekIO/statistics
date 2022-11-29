@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\DTO;
 
-class FlowCommandsStatisticsFieldsDto
+class FlowCommandsStatisticsFieldsDto implements QueueableDtoInterface
 {
     use Queueable;
 
