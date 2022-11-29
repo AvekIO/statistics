@@ -7,7 +7,7 @@ use AMQPEnvelope;
 
 trait Queueable
 {
-    public static function fromEnvelope(AMQPEnvelope $message): static
+    public static function fromEnvelope(AMQPEnvelope $message): self
     {
         $data = json_decode($message->getBody(), true);
 

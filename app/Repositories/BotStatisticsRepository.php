@@ -13,6 +13,26 @@ class BotStatisticsRepository
     {
     }
 
+    public function insert(
+        string $botToken,
+        int $sent,
+        int $received,
+        int $triggered,
+        int $subscribed,
+        int $unsubscribed,
+        string $dateHour
+    ): bool {
+        return $this->model->query()->insert([
+            'bot_token' => $botToken,
+            'sent' => $sent,
+            'received' => $received,
+            'triggered' => $triggered,
+            'subscribed' => $subscribed,
+            'unsubscribed' => $unsubscribed,
+            'date_hour' => $dateHour,
+        ]);
+    }
+
     public function getByBotTokenAndDateHourInterval(string $botToken, ?string $dateHourFrom, ?string $dateHourTo): Collection
     {
         return $this->model->query()

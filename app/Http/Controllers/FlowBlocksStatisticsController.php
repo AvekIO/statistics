@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 
 use App\DTO\FlowBlocksStatisticsFiltersDto;
 use App\Http\Requests\FlowBlocksStatisticsIndexRequest;
-use App\Services\FlowBlockStatisticsService;
+use App\Services\FlowBlocksStatisticsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FlowBlocksStatisticsController
 {
-    public function __construct(private readonly FlowBlockStatisticsService $service)
+    public function __construct(private readonly FlowBlocksStatisticsService $service)
     {
     }
 

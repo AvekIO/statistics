@@ -13,6 +13,16 @@ class FlowCommandsStatisticsRepository
     {
     }
 
+    public function insert(int $flowId, int $commandId, int $botChatTelegramUserId, string $triggeredAt): bool
+    {
+        return $this->model->query()->insert([
+            'flow_id' => $flowId,
+            'command_id' => $commandId,
+            'bot_chat_telegram_user_id' => $botChatTelegramUserId,
+            'triggered_at' => $triggeredAt,
+        ]);
+    }
+
     public function getByFlowIdAndCommandIdAndTriggeredAtInterval(
         int $flowId,
         ?int $commandId,
