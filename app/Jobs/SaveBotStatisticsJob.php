@@ -6,7 +6,7 @@ namespace App\Jobs;
 use App\DTO\BotStatisticsFieldsDto;
 use App\Services\BotStatisticsService;
 
-class SaveBotStatisticsJob implements ConsumeJobInterface
+class SaveBotStatisticsJob implements ConsumableJobInterface
 {
     public function __construct(
         private readonly BotStatisticsFieldsDto $dto,
