@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\DTO\FlowTelegramUsersStatisticsDto;
+use App\DTO\FlowTelegramUsersStatisticsFiltersDto;
 use App\Repositories\FlowTelegramUsersStatisticsRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,7 +13,7 @@ class FlowTelegramUsersStatisticsService
     {
     }
 
-    public function getSummary(FlowTelegramUsersStatisticsDto $dto): Collection
+    public function getSummary(FlowTelegramUsersStatisticsFiltersDto $dto): Collection
     {
         return $this->repository->getByFlowIdAndTelegramUserIdAndSubscribedAtInterval(
             $dto->flowId,

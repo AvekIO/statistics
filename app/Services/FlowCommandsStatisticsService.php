@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\DTO\FlowCommandsStatisticsDto;
+use App\DTO\FlowCommandsStatisticsFiltersDto;
 use App\Repositories\FlowCommandsStatisticsRepository;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,7 +13,7 @@ class FlowCommandsStatisticsService
     {
     }
 
-    public function getSummary(FlowCommandsStatisticsDto $dto): Collection
+    public function getSummary(FlowCommandsStatisticsFiltersDto $dto): Collection
     {
         return $this->repository->getByFlowIdAndCommandIdAndTriggeredAtInterval(
             $dto->flowId,

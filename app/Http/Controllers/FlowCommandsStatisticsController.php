@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\DTO\FlowCommandsStatisticsDto;
+use App\DTO\FlowCommandsStatisticsFiltersDto;
 use App\Http\Requests\FlowCommandsStatisticsIndexRequest;
 use App\Services\FlowCommandsStatisticsService;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +22,9 @@ class FlowCommandsStatisticsController
         return new JsonResponse($collection);
     }
 
-    private function wrapIntoDto(int $flowId, ?int $commandId, Request $request): FlowCommandsStatisticsDto
+    private function wrapIntoDto(int $flowId, ?int $commandId, Request $request): FlowCommandsStatisticsFiltersDto
     {
-        return new FlowCommandsStatisticsDto(
+        return new FlowCommandsStatisticsFiltersDto(
             $flowId,
             $commandId,
             $request->input('triggered_at_from'),
