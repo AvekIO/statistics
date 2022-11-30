@@ -9,6 +9,7 @@ RUN apt-get update \
     && pecl install amqp-1.11.0 \
     && docker-php-ext-install pdo \
     && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-enable amqp
+    && docker-php-ext-enable amqp \
+    && docker-php-ext-install sockets
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
