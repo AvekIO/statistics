@@ -5,6 +5,8 @@ RUN apt-get update \
     && apt-get install -yq apt-utils \
     && apt-get install -yq git vim iproute2 \
     && apt-get install -yq librabbitmq-dev \
+    && apt-get install -yq percona-toolkit \
+    && apt-get install -yq mc \
     && pecl install -o -f redis \
     && pecl install amqp-1.11.0 \
     && docker-php-ext-install pdo \
