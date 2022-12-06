@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('flow_block_statistics', function (Blueprint $table): void {
+        Schema::create('flow_blocks_statistics', function (Blueprint $table): void {
             $table->id();
             $table->unsignedSmallInteger('flow_id');
             $table->unsignedMediumInteger('block_id');
@@ -22,6 +22,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('flow_block_statistics');
+        Schema::dropIfExists('flow_blocks_statistics');
     }
 };

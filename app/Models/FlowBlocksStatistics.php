@@ -12,7 +12,7 @@ class FlowBlocksStatistics extends Model
 
     public $timestamps = false;
 
-    protected $table = 'flow_block_statistics';
+    protected $table = 'flow_blocks_statistics';
 
     protected $casts = [
         'triggered_at'  => 'datetime:Y-m-d H:i:s',
